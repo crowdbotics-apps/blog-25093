@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import reducer from "./store/reducers"
 import { article_list } from "./store/actions";
 
+
 class ArticleList extends Component {
   componentDidMount() {
     this.props.load();
@@ -48,7 +49,7 @@ class ArticleList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const detail = ownProps.navigation.getParam("detail", "Article");
+  const detail = ownProps.navigation.detail;
 
   return {
     detail: detail,
@@ -62,9 +63,16 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default {
-  name: "Articles",
-  screen: connect(mapStateToProps, mapDispatchToProps)(ArticleList),
-  reducer: reducer,
-  actions: [article_list]
-}
+// export default {
+//   name: "ArticleList",
+//   screen: connect(mapStateToProps, mapDispatchToProps)(ArticleList),
+//   reducer: reducer,
+//   actions: [article_list]
+// }
+
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ArticleList);

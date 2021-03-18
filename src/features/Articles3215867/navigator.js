@@ -2,12 +2,12 @@ import React from 'react';
 import { SlideMenuIcon } from '../../navigator/slideMenuIcon';
 import { createStackNavigator } from "react-navigation-stack";
 
-import Articles from "./index";
+import ArticleList from "./index";
 import Article from "./article";
 
 export default ArticlesNavigator = createStackNavigator({
-  Articles: {
-    screen: Articles.screen,
+  ArticleList: {
+    screen: ArticleList,
     navigationOptions: ({ navigation }) => ({
       title: "Article List",
       headerLeft: <SlideMenuIcon navigationProps={navigation} />,
@@ -20,3 +20,4 @@ export default ArticlesNavigator = createStackNavigator({
     screen: Article,
   },
 });
+
