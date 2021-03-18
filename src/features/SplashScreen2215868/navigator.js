@@ -11,3 +11,6 @@ export default SplashBlueprintNavigator = createStackNavigator(
     defaultNavigationOptions: ({ navigation }) => ({ header: null }),
   }
 );
+
+
+

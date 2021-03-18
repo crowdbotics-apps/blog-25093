@@ -1,11 +1,13 @@
 import React from "react"
-import { createDrawerNavigator } from "@react-navigation/drawer"
+import { createStackNavigator } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
 
-import SplashScreen from "../features/SplashScreen"
+import SplashScreen2215868 from "../features/SplashScreen2215868"
+
 import SideMenu from "./sideMenu"
 //@BlueprintImportInsertion
-
+import SplashScreen2215868Navigator from "../features/SplashScreen2215868/navigator"
+import LoginAndSignup1215869Navigator from "../features/LoginAndSignup1215869/navigator"
 /**
  * new navigators can be imported here
  */
@@ -14,21 +16,30 @@ const AppNavigator = {
   //@BlueprintNavigationInsertion
 
   /** new navigators can be added here */
-  SplashScreen: {
-    screen: SplashScreen
+  SplashScreen2215868: {
+    screen: SplashScreen2215868Navigator,
+  },
+  LoginAndSignup1215869: {
+    screen: LoginAndSignup1215869Navigator,
   }
 }
 
-const Drawer = createDrawerNavigator()
+const Stack= createStackNavigator();
 
 const AppContainer = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => <SideMenu {...props} />}>
-        {Object.keys(AppNavigator).map(s => (
-          <Drawer.Screen name={s} component={AppNavigator[s].screen} />
-        ))}
-      </Drawer.Navigator>
+      <Stack.Navigator initialRouteName="SplashScreen2215868">
+        <Stack.Screen
+          name='SplashScreen2215868'
+          component={SplashScreen2215868}
+        />
+        <Stack.Screen
+          name='LoginAndSignup1215869'
+          component={LoginAndSignup1215869}
+          screen={LoginAndSignup1215869Navigator}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
