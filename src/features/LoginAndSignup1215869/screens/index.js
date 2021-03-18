@@ -249,7 +249,7 @@ class SignInComponent extends Component {
   }
 }
 
-export class Blank extends Component {
+export class LoginSignup extends Component {
   constructor(props) {
     super(props);
   }

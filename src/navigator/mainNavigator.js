@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
 
 import SplashScreen2215868 from "../features/SplashScreen2215868"
+import LoginAndSignup1215869 from "../features/LoginAndSignup1215869/screens"
 
 import SideMenu from "./sideMenu"
 //@BlueprintImportInsertion
