@@ -22,3 +22,40 @@ export const article_readFailed = (response, starter) => ({
   response,
   starter
 })
+
+export const article_add = () => ({type:types.ARTICLE_ADD})
+export const article_addSucceeded = (response, starter) => ({
+  type: types.ARTICLE_ADD_SUCCEEDED,
+  response,
+  starter
+})
+export const article_addFailed = (response, starter) => ({
+  type: types.ARTICLE_ADD_FAILED,
+  response,
+  starter
+})
+
+export const article_delete = () => ({type:types.ARTICLE_DELETE})
+export const article_deleteFailed = (response, starter) => ({
+  type: types.ARTICLE_DELETE_FAILED,
+  response,
+  starter
+})
+export const article_deleteSucceeded = (response, starter) => ({
+  type: types.ARTICLE_DELETE_SUCCEEDED,
+  response,
+  starter
+})
+
+
+export const article_edit = () => ({type:types.ARTICLE_EDIT})
+export const article_editFailed = (response, starter) => ({
+  type: types.ARTICLE_EDIT_FAILED,
+  response,
+  starter
+})
+export const article_editSucceeded = (response, starter) => ({
+  type: types.ARTICLE_EDIT_SUCCEEDED,
+  response,
+  starter
+})

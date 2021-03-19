@@ -93,6 +93,11 @@ class SignUpComponent extends Component {
         'Signup Success',
         'Registration Successful. A confirmation will be sent to your e-mail address.',
       );
+      this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: 'Articles3215867' }],
+      });
+
     }
   }
 
@@ -186,7 +191,12 @@ class SignInComponent extends Component {
       Alert.alert('Login Error', requestError.message);
     }
     if (token) {
-      this.props.navigation.navigate(HOME_SCREEN_NAME);
+      // this.props.navigation.navigate(HOME_SCREEN_NAME);
+
+      this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: 'Articles3215867' }],
+      });
     }
   }
 

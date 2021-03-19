@@ -1,7 +1,11 @@
 import { all, call, put, spawn, takeEvery } from "redux-saga/effects";
 import * as types from "./constants"
 import * as actions from "./actions"
-import { article_list, article_read } from "./services"
+import { article_list,
+         article_read,
+         article_add,
+         article_edit,
+         article_delete} from "./services"
 
 function* article_listWorker(action) {
   try {
@@ -16,6 +20,7 @@ function* article_listWatcher() {
   yield takeEvery(types.ARTICLE_LIST, article_listWorker)
 }
 
+
 function* article_readWorker(action) {
   try {
     const result = yield call(article_read, action)
@@ -29,10 +34,53 @@ function* article_readWatcher() {
   yield takeEvery(types.ARTICLE_READ, article_readWorker)
 }
 
+
+function* article_addWorker(action) {
+  try {
+    const result = yield call(article_list, action)
+    yield put(actions.article_addSucceeded(result.data, action))
+  } catch (err) {
+    yield put(actions.article_addFailed(err, action))
+  }
+}
+
+function* article_addWatcher() {
+  yield takeEvery(types.ARTICLE_ADD, article_listWorker)
+}
+
+function* article_editWorker(action) {
+  try {
+    const result = yield call(article_list, action)
+    yield put(actions.article_addSucceeded(result.data, action))
+  } catch (err) {
+    yield put(actions.article_addFailed(err, action))
+  }
+}
+
+function* article_editWatcher() {
+  yield takeEvery(types.ARTICLE_ADD, article_listWorker)
+}
+
+function* article_deleteWorker(action) {
+  try {
+    const result = yield call(article_list, action)
+    yield put(actions.article_addSucceeded(result.data, action))
+  } catch (err) {
+    yield put(actions.article_addFailed(err, action))
+  }
+}
+
+function* article_deleteWatcher() {
+  yield takeEvery(types.ARTICLE_ADD, article_listWorker)
+}
+
 export default function* rootSaga() {
   const sagas = [
     article_listWatcher,
-    article_readWatcher
+    article_readWatcher,
+    article_addWatcher,
+    article_editWatcher,
+    article_deleteWatcher,
   ]
   yield all(
     sagas.map(saga =>

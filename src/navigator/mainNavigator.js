@@ -43,16 +43,20 @@ const AppContainer = () => {
         <Stack.Screen
           name='SplashScreen2215868'
           component={SplashScreen2215868}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name='LoginAndSignup1215869'
           component={LoginAndSignup1215869}
           screen={LoginAndSignup1215869Navigator}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name='Articles3215867'
           component={ArticleList}
           screen={ArticlesNavigator}
+          options={{headerShown: true}}
+
         />
         <Stack.Screen
           name='Article'
