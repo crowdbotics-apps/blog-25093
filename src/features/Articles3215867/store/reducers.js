@@ -52,6 +52,29 @@ export default function reducer(state = initialState, action) {
           errors: action.response
         }
       })
+
+     case types.ARTICLE_ADD:
+
+     console.log("REDUCER!!!!")
+      return Object.assign({}, state, {
+        api: {
+          isFetching: true,
+        },
+      })
+    case types.ARTICLE_ADD_SUCCEEDED:
+      return Object.assign({}, state, {
+        api: {
+          isFetching: false,
+        },
+        articles: [...state.articles, ...action.response]
+      })
+    case types.ARTICLE_ADD_FAILED:
+      return Object.assign({}, state, {
+        api: {
+          isFetching: false,
+          errors: action.response
+        }
+      })
     default:
       return state
   }

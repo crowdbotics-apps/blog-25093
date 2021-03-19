@@ -18,8 +18,15 @@ export function article_read(action) {
 
 export function article_add(action) {
 	//add payload and fill out post
-  return articlesAPI.post(`/article/${action.id}/`)
+	console.log("~~~~~~@@@@ ::::: adding article from services");
+	console.log(action)
+  return articlesAPI.post(`/article`, {
+  	title: 'generated article',
+  	body: 'my article text is here',
+  	author: 3,
+  })
 }
+
 
 export function article_edit(action) {
 	//add payload and fill out post
