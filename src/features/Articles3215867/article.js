@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ImageBackground } from 'react-native';
+import { Text, View, ImageBackground, Button } from 'react-native';
 import { connect } from "react-redux";
 import { styles } from "./styles";
 
@@ -10,16 +10,23 @@ function Article(props) {
 
   return (
     <View>
-      
-        <View style={styles.card}>
-          <Text style={styles.text}>
-           Title:  
+      {props.user.id === props.article.author  && 
+        <Button
+          title="You are the author of this article. Click to Edit" 
+        />
+
+      }
+        
+        <View >
+          <Text >
+           Title: {props.article.title} 
           </Text>
-          <Text style={styles.author}>
-           by:
+          <Text >
+           by: {props.article.author}
           </Text>
+          <Text>{props.article.body}</Text>
         </View>
-      <Text style={styles.body}>
+      <Text>
        
       </Text>
     </View>
@@ -33,7 +40,8 @@ const mapStateToProps = (state, ownProps) => {
 
   console.log("ARTICLE ID ==== " + id)
   return {
-    article: state.articlesReducer.articles.find(record => record.id == id)
+    article: state.articlesReducer.articles.find(record => record.id == id),
+    user: state.authReducer.user
   }
 }
 

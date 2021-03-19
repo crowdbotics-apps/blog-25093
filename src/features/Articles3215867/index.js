@@ -36,6 +36,16 @@ class ArticleList extends Component {
           <Text style="">
             by: {item.author}
           </Text>
+          {this.props.user.id === item.author  && 
+            <Button
+              title="You are the author of this article. Click to Edit." 
+            />
+          }
+          {this.props.user.id === item.author  && 
+            <Button
+              title="You are the author of this article. Click to Delete." 
+            />
+          }
         </View>
       
     </TouchableOpacity>
@@ -66,6 +76,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     detail: detail,
     articles: state.articlesReducer.articles,
+    user: state.authReducer.user,
   }
 }
 
