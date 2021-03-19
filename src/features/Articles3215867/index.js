@@ -4,7 +4,8 @@ import {
   FlatList,
   View,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Button
 } from 'react-native';
 import { styles } from "./styles";
 import { connect } from "react-redux";
@@ -20,29 +21,35 @@ class ArticleList extends Component {
   renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
-        this.props.navigation.navigate(this.props.detail, { id: item.id })
+        this.props.navigation.navigate(this.props.detail, { id: item.id, key:item.id })
       }}>
-      <ImageBackground source={{ uri: item.image }} style={styles.image}>
+      
         <View style={styles.card}>
-          <Text style={styles.text}>
-            {item.title}
+          <Text style="">
+            Title: {item.title}
           </Text>
-          <Text style={styles.author}>
-            {item.author}
+          <Text style="">
+            by: {item.author}
           </Text>
         </View>
-      </ImageBackground>
+      
     </TouchableOpacity>
   );
 
   render() {
     const { articles } = this.props;
     return (
-      <FlatList
-        data={articles}
-        renderItem={this.renderItem}
-        keyExtractor={item => `${item.id}`}
-      />
+      <View>
+         <Button
+          title="Add Article" 
+        />
+        <FlatList
+          data={articles}
+          renderItem={this.renderItem}
+          keyExtractor={item => `${item.id}`}
+        />
+
+      </View>
     );
 
   }

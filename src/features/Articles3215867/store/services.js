@@ -9,7 +9,7 @@ const articlesAPI = axios.create({
 });
 
 export function article_list(action) {
-  return articlesAPI.get(`/article`)
+  return articlesAPI.get(`/article/`)
 }
 
 export function article_read(action) {

@@ -65,15 +65,15 @@ export default function authApiReducer(state = INITIAL_STATE, action) {
         isLoading: false,
       };
 
-    case types.API_SIGNUP_FAILED:
-      return {
-        ...state,
-        error: mapErrorMessage(action),
-        success: false,
-        isLoading: false,
-      };
-    case types.API_SIGNOUT_REQUEST:
-      return {...state, token: null, error: null, success: false, isLoading: true};
+    // case types.API_SIGNUP_FAILED:
+    //   return {
+    //     ...state,
+    //     error: mapErrorMessage(action),
+    //     success: false,
+    //     isLoading: false,
+    //   };
+    // case types.API_SIGNOUT_REQUEST:
+    //   return {...state, token: null, error: null, success: false, isLoading: true};
 
     case types.API_SIGNOUT_SUCCESS:
       return {...INITIAL_STATE, success: true};

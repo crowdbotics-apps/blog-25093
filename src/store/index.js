@@ -25,14 +25,15 @@ const store = createStore(
   combineReducers({
     apiReducer: apiReducer,
     customReducer: customReducer,
+    articlesReducer: articlesReducer,
     authReducer: authReducer,
-    articlesReducer: articlesReducer
+    
   }),
   composeEnhancers(applyMiddleware(...middlewares))
-)
+);
 
-sagaMiddleware.run(rootSaga)
-sagaMiddleware.run(customRootSaga)
-sagaMiddleware.run(authRootSaga);
+sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(customRootSaga);
 sagaMiddleware.run(articlesSagas);
+sagaMiddleware.run(authRootSaga);
 export { store }
