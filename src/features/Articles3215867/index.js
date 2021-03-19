@@ -21,9 +21,14 @@ class ArticleList extends Component {
   renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => {
-        this.props.navigation.navigate(this.props.detail, { id: item.id, key:item.id })
+        console.log("Pressed on Article detail")
+        console.log(this.props)
+        this.props.navigation.navigate('Article', {
+          id: item.id})
       }}>
-      
+
+
+
         <View style={styles.card}>
           <Text style="">
             Title: {item.title}

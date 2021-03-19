@@ -4,28 +4,34 @@ import { connect } from "react-redux";
 import { styles } from "./styles";
 
 function Article(props) {
+  console.log("@@@@@@@@@@@@")
+  console.log(props)
+
+
   return (
     <View>
-      <ImageBackground source={{ uri: props.article.image }} style={styles.image}>
+      
         <View style={styles.card}>
           <Text style={styles.text}>
-            {props.article.title}
+           Title:  
           </Text>
           <Text style={styles.author}>
-            {props.article.author}
+           by:
           </Text>
         </View>
-      </ImageBackground>
       <Text style={styles.body}>
-        {props.article.body}
+       
       </Text>
     </View>
   );
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const id = ownProps.navigation.getParam("id", null);
+  // const id = ownProps.navigation.getParam("id", null);
+  console.log(ownProps);
+  const { id } = ownProps.route.params;
 
+  console.log("ARTICLE ID ==== " + id)
   return {
     article: state.articlesReducer.articles.find(record => record.id == id)
   }
