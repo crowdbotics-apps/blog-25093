@@ -34,6 +34,7 @@ class ArticleList extends Component {
       this._onCloseAddArticlePress = this._onCloseAddArticlePress.bind(this);
       this._onTitleTextChange = this._onTitleTextChange.bind(this);
       this._onBodyTextChange = this._onBodyTextChange.bind(this);
+      this._onAddArticlePress = this._onAddArticlePress.bind(this);
   };
 
   _onOpenAddArticlePress() {
@@ -55,6 +56,18 @@ class ArticleList extends Component {
     this.setState({
       bodyText: event.val,
     })
+  }
+
+  _onAddArticlePress(){
+
+    //this approach may require
+    console.log(this.state)
+    console.log(this.props)
+    const titleText = this.state.titleText;
+    const bodyText = this.state.bodyText;
+    console.log ("saving article :::::::: ", titleText, bodyText);
+    this.props.add_article(this.state.titleText, this.state.bodyText, this.props.authReducer)
+
   }
 
 
@@ -120,7 +133,7 @@ renderItem = ({ item }) => (
               />
               <Button
                 title="ADD ARTICLE" 
-                onPress={() => {alert("adding article"); this.props.add_article(this.state.titleText, this.state.bodyText, this.props.user.id)}}
+                onPress={this._onAddArticlePress}
               />
               <Button
                 title="X" 
@@ -140,6 +153,9 @@ const mapStateToProps = (state, ownProps) => {
     detail: detail,
     articles: state.articlesReducer.articles,
     user: state.authReducer.user,
+    authReducer:state.authReducer,
+    titleText: state.titleText,
+    bodyText:state.bodyText,
   }
 }
 

@@ -37,6 +37,7 @@ function* article_readWatcher() {
 
 function* article_addWorker(action) {
   try {
+    console.log('@@@@@ ADDING ADD ARTICLE WORKER')
     const result = yield call(article_add, action)
     yield put(actions.article_addSucceeded(result.data, action))
   } catch (err) {
@@ -45,12 +46,13 @@ function* article_addWorker(action) {
 }
 
 function* article_addWatcher() {
+  console.log('@@@@@ ADDING ADD ARTICLE WATCHER')
   yield takeEvery(types.ARTICLE_ADD, article_addWorker)
 }
 
 function* article_editWorker(action) {
   try {
-    const result = yield call(article_list, action)
+    const result = yield call(article_list, action.data)
     yield put(actions.article_addSucceeded(result.data, action))
   } catch (err) {
     yield put(actions.article_addFailed(err, action))

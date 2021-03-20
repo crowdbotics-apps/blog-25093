@@ -23,7 +23,8 @@ export const article_readFailed = (response, starter) => ({
   starter
 })
 
-export const article_add = () => ({type:types.ARTICLE_ADD})
+export const article_add = (data) => ({type:types.ARTICLE_ADD, data})
+
 export const article_addSucceeded = (response, starter) => ({
   type: types.ARTICLE_ADD_SUCCEEDED,
   response,

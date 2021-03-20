@@ -1,10 +1,11 @@
 import axios from "axios";
 
 const articlesAPI = axios.create({
-  baseURL: "https://blog-25093.botics.co/modules/articles",
+  baseURL: "http://blog-25093.botics.co/modules/articles",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json"
+
   }
 });
 
@@ -20,10 +21,20 @@ export function article_add(action) {
 	//add payload and fill out post
 	console.log("~~~~~~@@@@ ::::: adding article from services");
 	console.log(action)
-  return articlesAPI.post(`/article`, {
+
+  console.log("Token above")
+  console.log(action.data.author.token)
+  
+
+ 
+  return articlesAPI.post(`/article`,  {
   	title: 'generated article',
   	body: 'my article text is here',
-  	author: 3,
+  	author: action.data.author.user.id,
+    headers: {"X-CSRFToken": action.data.author.token, 'Referer': window.document.referer},
+    
+
+
   })
 }
 
