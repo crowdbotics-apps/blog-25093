@@ -25,18 +25,29 @@ export function article_add(action) {
   console.log("Token above")
   console.log(action.data.author.token)
   
-
- 
-  return articlesAPI.post(`/article`, null, {
-  	title: 'generated article',
-  	body: 'my article text is here',
-  	author: action.data.author.user.id,
-    headers: {"X-CSRFToken": action.data.author.token, 'Referer': window.document.referer},
-    
-
-
+  return axios.post("http://blog-25093.botics.co/modules/articles/article/", {
+   title: action.data.title,
+   body: action.data.body,
+   author: action.data.author.user.id,
+  },
+  {
+    headers: {
+      "X-CSRFToken": action.data.author.token
+    }
   })
 }
+
+
+
+//  // headers: {"X-CSRFToken": action.data.author.token, 'Referer': window.document.referer},
+//   return articlesAPI.post(`/article`,  {
+//   	title: action.data.title,
+//   	body: action.data.body,
+//   	author: action.data.author.user.id,
+    
+  
+//   })
+// }
 
 
 export function article_edit(action) {

@@ -141,6 +141,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(article_list()),
+    delete_article: (article_id) => dispatch(article_delete({article_id})),
     add_article: (title, body, author) => dispatch(article_add({title, body, author})),
   }
 }
