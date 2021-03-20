@@ -9,6 +9,7 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import AddArticle from "./AddArticle";
 import { styles } from "./styles";
 import { connect } from "react-redux";
 import reducer from "./store/reducers"
@@ -31,44 +32,43 @@ class ArticleList extends Component {
         bodyText: "",
       };
       this._onOpenAddArticlePress = this._onOpenAddArticlePress.bind(this);
-      this._onCloseAddArticlePress = this._onCloseAddArticlePress.bind(this);
-      this._onTitleTextChange = this._onTitleTextChange.bind(this);
-      this._onBodyTextChange = this._onBodyTextChange.bind(this);
-      this._onAddArticlePress = this._onAddArticlePress.bind(this);
+      // this._onCloseAddArticlePress = this._onCloseAddArticlePress.bind(this);
+      // this._onTitleTextChange = this._onTitleTextChange.bind(this);
+      // this._onBodyTextChange = this._onBodyTextChange.bind(this);
+      // this._onAddArticlePress = this._onAddArticlePress.bind(this);
   };
 
   _onOpenAddArticlePress() {
-    console.log("Opening Add Article")
-    this.setState({showAddArticle :true});
+    this.props.navigation.navigate('AddArticle', {})
   };
 
-  _onCloseAddArticlePress() {
-    console.log("Closing Add Article")
-    this.setState({showAddArticle :false});
-  };
+  // _onCloseAddArticlePress() {
+  //   console.log("Closing Add Article")
+  //   this.setState({showAddArticle :false});
+  // };
 
-  _onTitleTextChange(event) {
-    this.setState({
-      titleText: event.val,
-    })
-  }
-  _onBodyTextChange(event) {
-    this.setState({
-      bodyText: event.val,
-    })
-  }
+  // _onTitleTextChange(event) {
+  //   this.setState({
+  //     titleText: event.val,
+  //   })
+  // }
+  // _onBodyTextChange(event) {
+  //   this.setState({
+  //     bodyText: event.val,
+  //   })
+  // }
 
-  _onAddArticlePress(){
+  // _onAddArticlePress(){
 
-    //this approach may require
-    console.log(this.state)
-    console.log(this.props)
-    const titleText = this.state.titleText;
-    const bodyText = this.state.bodyText;
-    console.log ("saving article :::::::: ", titleText, bodyText);
-    this.props.add_article(this.state.titleText, this.state.bodyText, this.props.authReducer)
+  //   //this approach may require
+  //   console.log(this.state)
+  //   console.log(this.props)
+  //   const titleText = this.state.titleText;
+  //   const bodyText = this.state.bodyText;
+  //   console.log ("saving article :::::::: ", titleText, bodyText);
+  //   this.props.add_article(this.state.titleText, this.state.bodyText, this.props.authReducer)
 
-  }
+  // }
 
 
 renderItem = ({ item }) => (
@@ -104,7 +104,7 @@ renderItem = ({ item }) => (
   render() {
     const { articles } = this.props;
     return ( 
-      this.state.showAddArticle === false ?
+      // this.state.showAddArticle === false ?
           <View>
             <Button
               title="Add Article" 
@@ -116,30 +116,9 @@ renderItem = ({ item }) => (
               keyExtractor={item => `${item.id}`}
             />
            </View>
-        :
-          <SafeAreaView>
-              <TextInput
-                style={styles.input}
-                onChangeText={this._onTitleTextChange}
-                value={this.state.titleText}
-                placeholder={"My Amazing Title Here"}
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={this._onBodyTextChange}
-                value={this.state.bodyText}
-                placeholder={"Write your article here...."}
-                
-              />
-              <Button
-                title="ADD ARTICLE" 
-                onPress={this._onAddArticlePress}
-              />
-              <Button
-                title="X" 
-                onPress={this._onCloseAddArticlePress}
-              />
-            </SafeAreaView>
+        // : 
+        
+          
         
     );
 

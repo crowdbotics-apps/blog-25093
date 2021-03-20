@@ -6,6 +6,7 @@ import SplashScreen2215868 from "../features/SplashScreen2215868"
 import LoginAndSignup1215869 from "../features/LoginAndSignup1215869/screens"
 import ArticleList from "../features/Articles3215867"
 import Article from "../features/Articles3215867/article"
+import AddArticle from "../features/Articles3215867/AddArticle"
 
 import SideMenu from "./sideMenu"
 //@BlueprintImportInsertion
@@ -31,6 +32,9 @@ const AppNavigator = {
   },
   Article: {
     screen: Article,
+  },
+  AddArticle: {
+    screen: AddArticle,
   }
 }
 
@@ -62,6 +66,11 @@ const AppContainer = () => {
           name='Article'
           component={Article}
           screen={Article}
+        />
+         <Stack.Screen
+          name='AddArticle'
+          component={AddArticle}
+          screen={AddArticle}
         />
        
 

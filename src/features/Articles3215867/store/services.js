@@ -27,7 +27,7 @@ export function article_add(action) {
   
 
  
-  return articlesAPI.post(`/article`,  {
+  return articlesAPI.post(`/article`, null, {
   	title: 'generated article',
   	body: 'my article text is here',
   	author: action.data.author.user.id,
