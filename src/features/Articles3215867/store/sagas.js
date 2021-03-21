@@ -39,8 +39,11 @@ function* article_addWorker(action) {
   try {
     console.log('@@@@@ ADDING ADD ARTICLE WORKER')
     const result = yield call(article_add, action)
+    console.log(result)
     yield put(actions.article_addSucceeded(result.data, action))
   } catch (err) {
+    console.log("ERROR IN ADDING ARTICLE")
+    console.log(err)
     yield put(actions.article_addFailed(err, action))
   }
 }
@@ -52,28 +55,30 @@ function* article_addWatcher() {
 
 function* article_editWorker(action) {
   try {
-    const result = yield call(article_list, action.data)
-    yield put(actions.article_addSucceeded(result.data, action))
+    const result = yield call(article_edit, action.data)
+    yield put(actions.article_editSucceeded(result.data, action))
   } catch (err) {
-    yield put(actions.article_addFailed(err, action))
+    console.log(err)
+    yield put(actions.article_editFailed(err, action))
   }
 }
 
 function* article_editWatcher() {
-  yield takeEvery(types.ARTICLE_ADD, article_listWorker)
+  yield takeEvery(types.ARTICLE_EDIT, article_editWorker)
 }
 
 function* article_deleteWorker(action) {
   try {
-    const result = yield call(article_list, action)
-    yield put(actions.article_addSucceeded(result.data, action))
+    const result = yield call(article_delete, action)
+    yield put(actions.article_deleteSucceeded(result.data, action))
   } catch (err) {
-    yield put(actions.article_addFailed(err, action))
+    console.log(err)
+    yield put(actions.article_deleteFailed(err, action))
   }
 }
 
 function* article_deleteWatcher() {
-  yield takeEvery(types.ARTICLE_ADD, article_listWorker)
+  yield takeEvery(types.ARTICLE_DELETE, article_deleteWorker)
 }
 
 export default function* rootSaga() {

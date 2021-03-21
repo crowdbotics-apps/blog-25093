@@ -13,6 +13,7 @@ function Article(props) {
       {props.user.id === props.article.author  && 
         <Button
           title="You are the author of this article. Click to Edit" 
+          onPress = {() => props.navigation.navigate('EditArticle', {id: props.article.id})}
         />
 
       }

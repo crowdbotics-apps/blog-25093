@@ -13,115 +13,96 @@ import AddArticle from "./AddArticle";
 import { styles } from "./styles";
 import { connect } from "react-redux";
 import reducer from "./store/reducers"
+import { useIsFocused } from '@react-navigation/native';
 import { article_list,article_add, article_edit, article_delete } from "./store/actions";
-
 
 class ArticleList extends Component {
 
- 
-
   componentDidMount() {
-    this.props.load();
+    // this.props.load()
+    this.props.navigation.addListener('focus', () => {
+        this.props.load()
+    });
   }
-
+  
   constructor(props){
       super(props);
       this.state = {
-        showAddArticle: false,
-        titleText: "",
-        bodyText: "",
+        showAddArticle:false,
+      
       };
       this._onOpenAddArticlePress = this._onOpenAddArticlePress.bind(this);
-      // this._onCloseAddArticlePress = this._onCloseAddArticlePress.bind(this);
-      // this._onTitleTextChange = this._onTitleTextChange.bind(this);
-      // this._onBodyTextChange = this._onBodyTextChange.bind(this);
-      // this._onAddArticlePress = this._onAddArticlePress.bind(this);
-  };
+      
+  }
 
   _onOpenAddArticlePress() {
     this.props.navigation.navigate('AddArticle', {})
-  };
+  }
 
-  // _onCloseAddArticlePress() {
-  //   console.log("Closing Add Article")
-  //   this.setState({showAddArticle :false});
-  // };
+  renderItem = ({ item }) => (
+    <TouchableOpacity
+      key = {item.id + item.author}
+      onPress={() => {
+        console.log("Pressed on Article detail")
+        console.log(this.props)
+        this.props.navigation.navigate('Article', {
+          id: item.id})
+      }}
+    >
+      <View style={styles.card}>
 
-  // _onTitleTextChange(event) {
-  //   this.setState({
-  //     titleText: event.val,
-  //   })
-  // }
-  // _onBodyTextChange(event) {
-  //   this.setState({
-  //     bodyText: event.val,
-  //   })
-  // }
+        <Text style="">
+          Title: {item.title}
+        </Text>
+        <Text style="">
+          by: {item.author}
+        </Text>
+        <Text style="">
+         Text: {item.body}
+        </Text>
 
-  // _onAddArticlePress(){
+        {this.props.user.id === item.author  && 
+          <Button
+            title="Click to Edit." 
+            onPress = {() => this.props.navigation.navigate('EditArticle', {id: item.id})}
+          />
+        }
 
-  //   //this approach may require
-  //   console.log(this.state)
-  //   console.log(this.props)
-  //   const titleText = this.state.titleText;
-  //   const bodyText = this.state.bodyText;
-  //   console.log ("saving article :::::::: ", titleText, bodyText);
-  //   this.props.add_article(this.state.titleText, this.state.bodyText, this.props.authReducer)
-
-  // }
-
-
-renderItem = ({ item }) => (
-  <TouchableOpacity
-    onPress={() => {
-      console.log("Pressed on Article detail")
-      console.log(this.props)
-      this.props.navigation.navigate('Article', {
-        id: item.id})
-    }}>
-        <View style={styles.card}>
-          <Text style="">
-            Title: {item.title}
-          </Text>
-          <Text style="">
-            by: {item.author}
-          </Text>
-          {this.props.user.id === item.author  && 
-            <Button
-              title="You are the author of this article. Click to Edit." 
-            />
-          }
-          {this.props.user.id === item.author  && 
-            <Button
-              title="You are the author of this article. Click to Delete." 
-            />
-          }
-        </View>
-      
-    </TouchableOpacity>
+          
+          <Button
+            title="You are the author of this article. Click to Edit." 
+            onPress = {() => this.props.edit_article(item.id, "My Edited Title!", "MY edited TEXT!", this.props.authReducer)}
+          />
+        
+        {//this.props.user.id === item.author  && 
+          <Button
+            title="You are the author of this article. Click to Delete." 
+            onPress = {() => this.props.delete_article(item.id, this.props.authReducer)}
+          />
+        }
+    </View>
+      </TouchableOpacity>
   );
 
   render() {
-    const { articles } = this.props;
+      const articles = this.props.articles;
+      console.log(articles)
+      console.log(Object.keys(articles))
+      console.log(Object.values(articles))
     return ( 
-      // this.state.showAddArticle === false ?
-          <View>
-            <Button
-              title="Add Article" 
-              onPress={this._onOpenAddArticlePress}
-            />
-            <FlatList
-              data={articles}
-              renderItem={this.renderItem}
-              keyExtractor={item => `${item.id}`}
-            />
-           </View>
-        // : 
-        
-          
-        
-    );
+      <View>
+        <Button
+          title="+"
+          onPress={this._onOpenAddArticlePress}
+        />
+        <FlatList
+          data={articles.slice(1)}
+          renderItem={this.renderItem}
+          keyExtractor={item => `${item.id}`}
 
+        />
+       </View>
+    );
   }
 }
 
@@ -141,15 +122,14 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(article_list()),
-    delete_article: (article_id) => dispatch(article_delete({article_id})),
+    edit_article: (article_id, newTitle, newText, auth) => dispatch( article_edit({article_id, newTitle, newText, auth}) ),
+
+
+
+    delete_article: (article_id, auth) => dispatch(article_delete({article_id, auth})),
     add_article: (title, body, author) => dispatch(article_add({title, body, author})),
   }
 }
-
-
-
-
-
 
 export default connect(
   mapStateToProps,

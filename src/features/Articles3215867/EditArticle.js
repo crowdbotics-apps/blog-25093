@@ -3,11 +3,10 @@ import { Text, View, ImageBackground, Button, SafeAreaView, TextInput } from 're
 import { connect } from "react-redux";
 import { styles } from "./styles";
 
-import { article_add, article_list } from "./store/actions";
+import { article_list, article_edit } from "./store/actions";
 
-function AddArticle(props) {
+function EditArticle(props) {
   
-  const [count, setCount] = useState(0);
   const [titleText, setTitleText] = useState("");
   const [bodyText, setBodyText] = useState("")
 
@@ -15,24 +14,25 @@ function AddArticle(props) {
   return (
 
       <SafeAreaView>
+        <Text> Edit Article </Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => setTitleText(text)}
           value={titleText}
-          placeholder={"My Amazing Title Here"}
+          placeholder={props.article.title}
         />
         <TextInput
           style={styles.input}
           onChangeText={(text) => setBodyText(text)}
           value={bodyText}
-          placeholder={"Write your article here...."}
+          placeholder={props.article.body}
           
         />
         <Button
-          title="ADD ARTICLE" 
+          title="edit ARTICLE" 
           onPress={() => { 
-            alert("Adding article! Returning you to Article List now"); 
-            props.add_article(titleText, bodyText, props.authReducer);
+            alert("Editing article! Returning you to Article List now"); 
+            props.edit_article(props.article.id, titleText, bodyText, props.authReducer);
             // props.load(); //load new data before navigating back to list.
             props.navigation.navigate("Articles3215867", {})
           }}
@@ -45,13 +45,14 @@ function AddArticle(props) {
 
 const mapStateToProps = (state, ownProps) => {
   // const id = ownProps.navigation.getParam("id", null);
-  // console.log(ownProps);
-  // const { id } = ownProps.route.params;
+  console.log(state);
+  const { id } = ownProps.route.params;
 
   // console.log("ARTICLE ID ==== " + id)
   return {
     // article: state.articlesReducer.articles.find(record => record.id == id),
     // user: state.authReducer.user
+    article: state.articlesReducer.articles.find(record => record.id == id),
     user: state.authReducer.user,
     authReducer:state.authReducer,
     titleText: state.titleText,
@@ -62,8 +63,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(article_list()),
-    add_article: (title, body, author) => dispatch(article_add({title, body, author})),
+    edit_article: (article_id, newTitle, newBody, auth) => dispatch( article_edit({article_id, newTitle, newBody, auth}) ),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddArticle)
+export default connect(mapStateToProps, mapDispatchToProps)(EditArticle)

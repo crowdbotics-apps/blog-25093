@@ -4,9 +4,11 @@ import { NavigationContainer } from "@react-navigation/native"
 
 import SplashScreen2215868 from "../features/SplashScreen2215868"
 import LoginAndSignup1215869 from "../features/LoginAndSignup1215869/screens"
+import PasswordRecover from "../features/LoginAndSignup1215869/screens/PasswordRecover"
 import ArticleList from "../features/Articles3215867"
 import Article from "../features/Articles3215867/article"
 import AddArticle from "../features/Articles3215867/AddArticle"
+import EditArticle from "../features/Articles3215867/EditArticle"
 
 import SideMenu from "./sideMenu"
 //@BlueprintImportInsertion
@@ -35,6 +37,9 @@ const AppNavigator = {
   },
   AddArticle: {
     screen: AddArticle,
+  },
+  PasswordRecover: {
+    screen: PasswordRecover,
   }
 }
 
@@ -71,6 +76,16 @@ const AppContainer = () => {
           name='AddArticle'
           component={AddArticle}
           screen={AddArticle}
+        />
+        <Stack.Screen
+          name='PasswordRecover'
+          component={PasswordRecover}
+          screen={PasswordRecover}
+        />
+        <Stack.Screen
+          name='EditArticle'
+          component={EditArticle}
+          screen={EditArticle}
         />
        
 
