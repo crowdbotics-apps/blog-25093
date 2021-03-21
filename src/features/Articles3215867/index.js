@@ -19,83 +19,58 @@ import { article_list,article_add, article_edit, article_delete } from "./store/
 class ArticleList extends Component {
 
   componentDidMount() {
-    // this.props.load()
     this.props.navigation.addListener('focus', () => {
         this.props.load()
-    });
-  }
-  
-  constructor(props){
-      super(props);
-      this.state = {
-        showAddArticle:false,
-      
-      };
-      this._onOpenAddArticlePress = this._onOpenAddArticlePress.bind(this);
-      
+    })
   }
 
-  _onOpenAddArticlePress() {
-    this.props.navigation.navigate('AddArticle', {})
+  constructor(props){
+      super(props);
   }
 
   renderItem = ({ item }) => (
     <TouchableOpacity
       key = {item.id + item.author}
       onPress={() => {
-        console.log("Pressed on Article detail")
-        console.log(this.props)
-        this.props.navigation.navigate('Article', {
-          id: item.id})
+        this.props.navigation.navigate('Article', {id: item.id})
       }}
     >
       <View style={styles.card}>
-
-        <Text style={styles.titleText}>
-          {item.title} 
-        </Text>
-        <Text style={styles.bodyText}>
-         {item.body}
-        </Text>
-        {this.props.user.id === item.author  && 
+        <Text style={styles.titleText}>{item.title}</Text>
+        <Text style={styles.bodyText}>{item.body}</Text>
+        {//conditional rendering for Delete/Edit buttons
+          this.props.user.id === item.author  && 
           <Button
             title="📝 Edit" 
             onPress = {() => this.props.navigation.navigate('EditArticle', {id: item.id})}
           />
         }
-        
         {this.props.user.id === item.author  && 
           <Button
             title="🗑️ Delete" 
             onPress = {() => this.props.delete_article(item.id, this.props.authReducer)}
           />
         }
-
-       
-    </View>
-      </TouchableOpacity>
-  );
+      </View>
+    </TouchableOpacity>
+  )
 
   render() {
       const articles = this.props.articles;
-      console.log(articles)
-      console.log(Object.keys(articles))
-      console.log(Object.values(articles))
     return ( 
       <View style={styles.container}>
         <Button
           style={styles.addButton}
           title="➕ Add Article"
-          onPress={this._onOpenAddArticlePress}
+          onPress={this.props.navigation.navigate('AddArticle', {})}
         />
         <FlatList
           data={articles.slice(1)}
           renderItem={this.renderItem}
           keyExtractor={item => `${item.id}`}
-
-        />
-       </View>
-    );
+        />     
+      </View>
+    )
   }
 }
 
@@ -115,19 +90,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(article_list()),
-    edit_article: (article_id, newTitle, newText, auth) => dispatch( article_edit({article_id, newTitle, newText, auth}) ),
-
-
-
     delete_article: (article_id, auth) => dispatch(article_delete({article_id, auth})),
-    add_article: (title, body, author) => dispatch(article_add({title, body, author})),
   }
 }
-
-
-
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ArticleList);
+)(ArticleList)
