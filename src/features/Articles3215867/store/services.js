@@ -38,7 +38,7 @@ export async function article_edit(action) {
 
   console.log(action.newTitle)
   console.log(action.newBody)
-  
+
   let editedArticle = await axios.patch(`https://blog-25093.botics.co/modules/articles/article/${action.article_id}/`, {
    title: action.newTitle,
    body: action.newBody,
@@ -60,7 +60,7 @@ export async function article_delete(action) {
 
   axios({
     method: 'delete',
-    url: `https://blog-25093.botics.co/modules/article/`,
+    url: `https://blog-25093.botics.co/modules/article/${action.data.article_id}/`,
     params: {
     },
     headers:{

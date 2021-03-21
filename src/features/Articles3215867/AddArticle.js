@@ -1,42 +1,51 @@
 import React, { useState } from 'react';
-import { Text, View, ImageBackground, Button, SafeAreaView, TextInput } from 'react-native';
+import { Text, View, ImageBackground, Button, SafeAreaView, TextInput, Form, Input } from 'react-native';
 import { connect } from "react-redux";
 import { styles } from "./styles";
 
 import { article_add, article_list } from "./store/actions";
 
 function AddArticle(props) {
-  
-  const [count, setCount] = useState(0);
+ 
   const [titleText, setTitleText] = useState("");
-  const [bodyText, setBodyText] = useState("")
+  const [bodyText, setBodyText] = useState("");
 
+  function onSubmit(){
+    if(bodyText !== "" && titleText !== ""){
+      alert("Adding article! Returning you to Article List now"); 
+      props.add_article(titleText, bodyText, props.authReducer);
+      // props.load(); //load new data before navigating back to list.
+      props.navigation.navigate("Articles3215867", {})
+    } else{
+      alert("Please finish filling out the form.")
+    }
+  }
 
   return (
 
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setTitleText(text)}
-          value={titleText}
-          placeholder={"My Amazing Title Here"}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setBodyText(text)}
-          value={bodyText}
-          placeholder={"Write your article here...."}
-          
-        />
-        <Button
-          title="ADD ARTICLE" 
-          onPress={() => { 
-            alert("Adding article! Returning you to Article List now"); 
-            props.add_article(titleText, bodyText, props.authReducer);
-            // props.load(); //load new data before navigating back to list.
-            props.navigation.navigate("Articles3215867", {})
-          }}
-        />
+      <SafeAreaView style={styles.container}>
+          <TextInput
+            style={styles.titleTextInput}
+            onChangeText={(text) => setTitleText(text)}
+            value={titleText}
+            placeholder={"Article Title Goes Here"}
+
+          />
+          <TextInput
+            style={styles.bodyTextInput}
+            onChangeText={(text) => setBodyText(text)}
+            value={bodyText}
+            placeholder={"...And the text goes here!"}
+            multiline={true}
+          />
+
+          <Button 
+            type="submit" 
+            value="Submit"
+            title="ADD ARTICLE" 
+            onPress={onSubmit}
+          />
+        
    
       </SafeAreaView>
  

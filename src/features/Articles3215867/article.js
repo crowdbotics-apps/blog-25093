@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ImageBackground, Button } from 'react-native';
+import { Text, View, ImageBackground, Button, ScrollView } from 'react-native';
 import { connect } from "react-redux";
 import { styles } from "./styles";
 
@@ -9,27 +9,20 @@ function Article(props) {
 
 
   return (
-    <View>
-      {props.user.id === props.article.author  && 
-        <Button
-          title="You are the author of this article. Click to Edit" 
-          onPress = {() => props.navigation.navigate('EditArticle', {id: props.article.id})}
-        />
-
-      }
-        
-        <View >
-          <Text >
-           Title: {props.article.title} 
-          </Text>
-          <Text >
-           by: {props.article.author}
-          </Text>
-          <Text>{props.article.body}</Text>
-        </View>
-      <Text>
-       
-      </Text>
+    <View style={styles.container}>
+      <View style={styles.card2}>
+        <Text style = {styles.titleText}> {props.article.title} </Text>
+          <ScrollView>
+            <Text style={styles.bodyText}>{props.article.body}</Text>
+          </ScrollView>
+          {props.user.id === props.article.author  && 
+          <Button
+            style={styles.title}
+            title="📝 Edit" 
+            onPress = {() => props.navigation.navigate('EditArticle', {id: props.article.id})}
+          />
+          }
+      </View>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, ImageBackground, Button, SafeAreaView, TextInput } from 'react-native';
+import { Text, View, ImageBackground, Button, SafeAreaView, TextInput, TextArea } from 'react-native';
 import { connect } from "react-redux";
 import { styles } from "./styles";
 
@@ -7,35 +7,41 @@ import { article_list, article_edit } from "./store/actions";
 
 function EditArticle(props) {
   
-  const [titleText, setTitleText] = useState("");
-  const [bodyText, setBodyText] = useState("")
+  const [titleText, setTitleText] = useState(props.article.title);
+  const [bodyText, setBodyText] = useState(props.article.body)
 
+  function onSubmit(){
+    if(bodyText !== "" && titleText !== ""){
+      alert("Adding article! Returning you to Article List now"); 
+      props.edit_article(props.article.id, titleText, bodyText, props.authReducer);
+            // props.load(); //load new data before navigating back to list.
+      props.navigation.navigate("Articles3215867", {})
+    } else{
+      alert("Please finish filling out the form.")
+    }
+  }
 
   return (
 
-      <SafeAreaView>
-        <Text> Edit Article </Text>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.infoText}>Your existing article is shown below, edit as you see fit and submit! </Text>
         <TextInput
-          style={styles.input}
+          style={styles.titleTextInput}
           onChangeText={(text) => setTitleText(text)}
           value={titleText}
-          placeholder={props.article.title}
+
         />
         <TextInput
-          style={styles.input}
+          style={styles.bodyTextInput}
           onChangeText={(text) => setBodyText(text)}
           value={bodyText}
-          placeholder={props.article.body}
+          multiline={true}
+
           
         />
         <Button
-          title="edit ARTICLE" 
-          onPress={() => { 
-            alert("Editing article! Returning you to Article List now"); 
-            props.edit_article(props.article.id, titleText, bodyText, props.authReducer);
-            // props.load(); //load new data before navigating back to list.
-            props.navigation.navigate("Articles3215867", {})
-          }}
+          title="✅ Submit Changes" 
+          onPress={onSubmit}
         />
    
       </SafeAreaView>

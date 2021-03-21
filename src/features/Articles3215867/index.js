@@ -51,35 +51,27 @@ class ArticleList extends Component {
     >
       <View style={styles.card}>
 
-        <Text style="">
-          Title: {item.title}
+        <Text style={styles.titleText}>
+          {item.title} 
         </Text>
-        <Text style="">
-          by: {item.author}
+        <Text style={styles.bodyText}>
+         {item.body}
         </Text>
-        <Text style="">
-         Text: {item.body}
-        </Text>
-
         {this.props.user.id === item.author  && 
           <Button
-            title="Click to Edit." 
+            title="📝 Edit" 
             onPress = {() => this.props.navigation.navigate('EditArticle', {id: item.id})}
           />
         }
-
-          
-          <Button
-            title="You are the author of this article. Click to Edit." 
-            onPress = {() => this.props.edit_article(item.id, "My Edited Title!", "MY edited TEXT!", this.props.authReducer)}
-          />
         
-        {//this.props.user.id === item.author  && 
+        {this.props.user.id === item.author  && 
           <Button
-            title="You are the author of this article. Click to Delete." 
+            title="🗑️ Delete" 
             onPress = {() => this.props.delete_article(item.id, this.props.authReducer)}
           />
         }
+
+       
     </View>
       </TouchableOpacity>
   );
@@ -90,9 +82,10 @@ class ArticleList extends Component {
       console.log(Object.keys(articles))
       console.log(Object.values(articles))
     return ( 
-      <View>
+      <View style={styles.container}>
         <Button
-          title="+"
+          style={styles.addButton}
+          title="➕ Add Article"
           onPress={this._onOpenAddArticlePress}
         />
         <FlatList
@@ -130,6 +123,9 @@ const mapDispatchToProps = dispatch => {
     add_article: (title, body, author) => dispatch(article_add({title, body, author})),
   }
 }
+
+
+
 
 export default connect(
   mapStateToProps,
