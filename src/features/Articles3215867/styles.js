@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       marginHorizontal: 0,
       justifyContent: 'center', 
-
+      flex:1,
       backgroundColor: '#E9E0F9'
     },
 
