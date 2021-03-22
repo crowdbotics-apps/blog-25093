@@ -22,9 +22,7 @@ export const article_readFailed = (response, starter) => ({
   response,
   starter
 })
-
 export const article_add = (data) => ({type:types.ARTICLE_ADD, data})
-
 export const article_addSucceeded = (response, starter) => ({
   type: types.ARTICLE_ADD_SUCCEEDED,
   response,
@@ -47,8 +45,6 @@ export const article_deleteSucceeded = (response, starter) => ({
   response,
   starter
 })
-
-
 export const article_edit = (data) => ({type:types.ARTICLE_EDIT, data})
 export const article_editFailed = (response, starter) => ({
   type: types.ARTICLE_EDIT_FAILED,

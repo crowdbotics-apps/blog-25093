@@ -56,13 +56,13 @@ class ArticleList extends Component {
   )
 
   render() {
-      const articles = this.props.articles;
+    const articles = this.props.articles;
     return ( 
       <View style={styles.container}>
         <Button
           style={styles.addButton}
           title="➕ Add Article"
-          onPress={this.props.navigation.navigate('AddArticle', {})}
+          onPress={() => this.props.navigation.navigate('AddArticle', {})}
         />
         <FlatList
           data={articles.slice(1)}

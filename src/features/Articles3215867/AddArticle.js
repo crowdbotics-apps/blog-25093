@@ -45,10 +45,7 @@ function AddArticle(props) {
             title="ADD ARTICLE" 
             onPress={onSubmit}
           />
-        
-   
       </SafeAreaView>
- 
   );
 }
 
