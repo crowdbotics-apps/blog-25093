@@ -40,16 +40,23 @@ class ArticleList extends Component {
         <Text style={styles.bodyText}>{item.body}</Text>
         {//conditional rendering for Delete/Edit buttons
           this.props.user.id === item.author  && 
-          <Button
-            title="📝 Edit" 
-            onPress = {() => this.props.navigation.navigate('EditArticle', {id: item.id})}
-          />
-        }
-        {this.props.user.id === item.author  && 
-          <Button
-            title="🗑️ Delete" 
-            onPress = {() => this.props.delete_article(item.id, this.props.authReducer)}
-          />
+          <View>
+            <TouchableOpacity
+              title="📝 Edit" 
+              onPress = {() => this.props.navigation.navigate('EditArticle', {id: item.id})}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>📝 Edit</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              title="🗑️ Delete" 
+              onPress = {() => this.props.delete_article(item.id, this.props.authReducer)}
+              style={styles.button}            
+            >
+              <Text style={styles.buttonText}>🗑️ Delete</Text>
+            </TouchableOpacity>
+          </View>
         }
       </View>
     </TouchableOpacity>

@@ -12,10 +12,18 @@ export const styles = StyleSheet.create({
     },
 
 
-  addButton: {
+  button: {
     backgroundColor: '#727CF5',
+    color: '#ffffff',
+    borderWidth:1,
+    borderColor:'#E9E0F9',
     fontWeight: 'bold',
-    padding: 16,
+    padding: 12,
+    margin:2,
+  },
+  buttonText: {
+    color: '#ffffff',
+    textAlign: 'center',
   },
   card: {
     padding: 12,
@@ -71,7 +79,8 @@ export const styles = StyleSheet.create({
   },
    bodyText: {
     fontSize: 12,
-    color: '#ffffff'
+    color: '#ffffff',
+    paddingBottom:12,
   },
 
   author: {
