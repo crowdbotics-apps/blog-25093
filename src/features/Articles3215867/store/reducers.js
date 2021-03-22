@@ -17,8 +17,6 @@ export default function reducer(state = initialState, action) {
         },
       })
     case types.ARTICLE_LIST_SUCCEEDED:
-      console.log("Article List reducer")
-      console.log(action)
       return Object.assign({}, state, {
         api: {
           isFetching: false,

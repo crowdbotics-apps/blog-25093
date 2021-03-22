@@ -23,7 +23,7 @@ function AddArticle(props) {
 
   return (
 
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
           <TextInput
             style={styles.titleTextInput}
             onChangeText={(text) => setTitleText(text)}
@@ -45,7 +45,7 @@ function AddArticle(props) {
             title="ADD ARTICLE" 
             onPress={onSubmit}
           />
-      </SafeAreaView>
+      </View>
   );
 }
 

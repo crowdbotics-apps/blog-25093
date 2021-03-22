@@ -23,7 +23,7 @@ function EditArticle(props) {
 
   return (
 
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.infoText}>Your existing article is shown below, edit as you see fit and submit! </Text>
         <TextInput
           style={styles.titleTextInput}
@@ -44,7 +44,7 @@ function EditArticle(props) {
           onPress={onSubmit}
         />
    
-      </SafeAreaView>
+      </View>
  
   );
 }
