@@ -9,12 +9,12 @@ import {
   TextInput,
   Button
 } from 'react-native';
-import AddArticle from "./AddArticle";
-import { styles } from "./styles";
-import { connect } from "react-redux";
-import reducer from "./store/reducers"
+import AddArticle from './AddArticle';
+import { styles } from './styles';
+import { connect } from 'react-redux';
+import reducer from './store/reducers'
 import { useIsFocused } from '@react-navigation/native';
-import { article_list,article_add, article_edit, article_delete } from "./store/actions";
+import { article_list,article_add, article_edit, article_delete } from './store/actions';
 
 class ArticleList extends Component {
 
@@ -42,7 +42,7 @@ class ArticleList extends Component {
           this.props.user.id === item.author  && 
           <View>
             <TouchableOpacity
-              title="📝 Edit" 
+              title='📝 Edit' 
               onPress = {() => this.props.navigation.navigate('EditArticle', {id: item.id})}
               style={styles.button}
             >
@@ -50,7 +50,7 @@ class ArticleList extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              title="🗑️ Delete" 
+              title='🗑️ Delete' 
               onPress = {() => this.props.delete_article(item.id, this.props.authReducer)}
               style={styles.button}            
             >
@@ -68,7 +68,7 @@ class ArticleList extends Component {
       <View style={styles.container}>
         <Button
           style={styles.addButton}
-          title="➕ Add Article"
+          title='➕ Add Article'
           onPress={() => this.props.navigation.navigate('AddArticle', {})}
         />
         <FlatList

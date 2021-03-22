@@ -28,7 +28,7 @@ function AddArticle(props) {
             style={styles.titleTextInput}
             onChangeText={(text) => setTitleText(text)}
             value={titleText}
-            placeholder={"Article Title Goes Here"}
+            placeholder={"Title goes here"}
 
           />
           <TextInput
