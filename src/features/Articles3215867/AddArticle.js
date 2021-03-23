@@ -50,14 +50,7 @@ function AddArticle(props) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // const id = ownProps.navigation.getParam("id", null);
-  // console.log(ownProps);
-  // const { id } = ownProps.route.params;
-
-  // console.log("ARTICLE ID ==== " + id)
   return {
-    // article: state.articlesReducer.articles.find(record => record.id == id),
-    // user: state.authReducer.user
     user: state.authReducer.user,
     authReducer:state.authReducer,
     titleText: state.titleText,
